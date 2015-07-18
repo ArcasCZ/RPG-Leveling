@@ -7,7 +7,6 @@
 package cz.arcas.rpgleveling;
 
 import cz.arcas.rpgleveling.listeners.PlayerListener;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
