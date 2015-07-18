@@ -28,45 +28,44 @@ public class PlayerListener implements Listener {
     
     
     
-    @EventHandler(priority = EventPriority.HIGH)
-    public void onPlayerExpChange(PlayerExpChangeEvent event){
-        int getExp = event.getAmount();
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerExpChange(PlayerExpChangeEvent event) {
+        int exp = event.getAmount();
         event.setAmount(0);
-        
+
         Player player = event.getPlayer();
-        
+
         int playerLevel = player.getLevel();
-        
+
         Boolean startAtLvlOne = plugin.getConfig().getBoolean("startAtLvlOne");
-        
-        if(!startAtLvlOne){
+
+        if (!startAtLvlOne)
             playerLevel++;
-        }
-        
-        if(playerLevel == 0){
+
+        if (playerLevel == 0) {
             player.setExp(1);
             return;
         }
-        
-        int xpBoost = plugin.getConfig().getInt("xpBoost");      
+
+        int xpBoost = plugin.getConfig().getInt("xpBoost");
         int expToLevel = xpBoost * playerLevel;
-        
+
         float currentProgressPercent = player.getExp();
         float currentProgress = currentProgressPercent * expToLevel;
-        
-        float newProgress = (currentProgress + getExp) / expToLevel;
+
+        float newProgress = (currentProgress + exp) / expToLevel;
 
         player.setExp(newProgress);
     }
-    
-    @EventHandler(priority = EventPriority.NORMAL)
-    public void onPlayerLevelChange(PlayerLevelChangeEvent event){
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerLevelChange(PlayerLevelChangeEvent event) {
         Player player = event.getPlayer();
-        
-        if(player.getLevel() == 0){
+
+        if (player.getLevel() == 0 || event.getOldLevel() > event.getNewLevel()) {
             return;
         }
-        
+
         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1F, 1F);
     }
 }
