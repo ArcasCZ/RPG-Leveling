@@ -7,6 +7,7 @@
 package cz.arcas.rpgleveling;
 
 import cz.arcas.rpgleveling.listeners.PlayerListener;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,21 +16,25 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Arcas
  */
 public final class RPGLeveling extends JavaPlugin{
+    
     @Override
     public void onEnable(){
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(new PlayerListener(), this);
+        pm.registerEvents(new PlayerListener(this), this);
+
+        saveDefaultConfig();
         
-        System.out.println("Loaded!");
-        System.out.println("By ArcasCZ | http://uranus-portal.com");
+        getLogger().info("Loaded!");
+        getLogger().info("By ArcasCZ | http://uranus-portal.com");
     }
     
     @Override
     public void onDisable(){
-        System.out.println("Unloaded!");
-        System.out.println("By ArcasCZ | http://uranus-portal.com");
+        getLogger().info("Unloaded!");
+        getLogger().info("By ArcasCZ | http://uranus-portal.com");
     }
     
+
     
     
 }

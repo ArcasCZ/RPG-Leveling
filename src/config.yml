@@ -1,0 +1,4 @@
+# level * xpBoost = xpForNextLevel (default = 1250)
+xpBoost: 1250
+# if true, skip lvl 0 (need 1 XP for lvl up to 1) - else add +1 to each level
+startAtLvlOne: true
