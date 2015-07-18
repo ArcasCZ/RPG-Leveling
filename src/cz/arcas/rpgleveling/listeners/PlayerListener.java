@@ -30,7 +30,7 @@ public class PlayerListener implements Listener {
     
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerExpChange(PlayerExpChangeEvent event){
-        int getExp = event.getAmount(); // 3
+        int getExp = event.getAmount();
         event.setAmount(0);
         
         Player player = event.getPlayer();
