@@ -20,10 +20,10 @@ public class PlayerListener implements Listener {
         int getExp = event.getAmount();
         Player player = event.getPlayer();
         
-        int playerLevel = player.getLevel() + 1; // 10
-        int expToLevel = 2500 * playerLevel; // 25 000
-        float currentProgressPercent = player.getExp(); // 0,5
-        float currentProgress = expToLevel * currentProgressPercent; // 12 500
+        int playerLevel = player.getLevel() + 1;
+        int expToLevel = 2500 * playerLevel;
+        float currentProgressPercent = player.getExp();
+        float currentProgress = expToLevel * currentProgressPercent;
         float newProgress = expToLevel / (currentProgress + getExp);
         
         player.setExp(newProgress);
