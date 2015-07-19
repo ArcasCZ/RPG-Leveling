@@ -16,10 +16,12 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public final class RPGLeveling extends JavaPlugin{
     
+    private static RPGLeveling plugin;
     @Override
     public void onEnable(){
+        plugin = this;
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(new PlayerListener(this), this);
+        pm.registerEvents(new PlayerListener(), this);
 
         saveDefaultConfig();
         
@@ -33,6 +35,10 @@ public final class RPGLeveling extends JavaPlugin{
         getLogger().info("By ArcasCZ | http://uranus-portal.com");
     }
     
+    
+    public static RPGLeveling getPlugin(){
+        return plugin;
+    }
 
     
     

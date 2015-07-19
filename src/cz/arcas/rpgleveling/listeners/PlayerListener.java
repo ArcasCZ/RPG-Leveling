@@ -22,8 +22,8 @@ import org.bukkit.event.player.PlayerLevelChangeEvent;
 public class PlayerListener implements Listener {
 
     RPGLeveling plugin;
-    public PlayerListener(RPGLeveling RPGLeveling) {
-        this.plugin = RPGLeveling;
+    public PlayerListener() {
+        this.plugin = RPGLeveling.getPlugin();
     }
     
     
