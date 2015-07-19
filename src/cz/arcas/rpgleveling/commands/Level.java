@@ -35,18 +35,18 @@ public class Level implements CommandExecutor{
             player = Bukkit.getPlayer(name);
             if(player == null || !player.isOnline()){
                 sender.sendMessage(ChatColor.RED + "Player is offline!");
-                return false;
+                return true;
             }
         }else if(sender instanceof Player){
             player = (Player) sender;
         }else{
             sender.sendMessage("This command is only for players!");
-            return false;
+            return true;
         }
         
         if(!sender.hasPermission("rpgleveling.level")){
             sender.sendMessage(ChatColor.RED + "You don't have permissions for this!");
-            return false;
+            return true;
         }
         
         int xpBoost = 0;
