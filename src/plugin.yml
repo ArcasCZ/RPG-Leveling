@@ -1,3 +1,11 @@
 name: RPGLeveling
+author: ArcasCZ
 main: cz.arcas.rpgleveling.RPGLeveling
-version: 1.1.0
+version: 1.2.0
+commands:
+   level:
+      description: Get player level info.
+      usage: /<command>
+      permission: <plugin name>.level
+      permission-message: You don't have <permission>
+      default: true

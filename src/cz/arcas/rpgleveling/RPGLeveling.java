@@ -6,6 +6,7 @@
 
 package cz.arcas.rpgleveling;
 
+import cz.arcas.rpgleveling.commands.Level;
 import cz.arcas.rpgleveling.listeners.PlayerListener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,11 +20,29 @@ public final class RPGLeveling extends JavaPlugin{
     private static RPGLeveling plugin;
     @Override
     public void onEnable(){
+        saveDefaultConfig();
+  
+        String version = getDescription().getVersion();
+        String configVersion = getConfig().getString("version");
+        
+        if(!version.equalsIgnoreCase(configVersion)){
+            getLogger().warning("Config version mismatch!");
+            getLogger().warning("Please create backup of old config, delete old config, and set up it again.");
+            getLogger().warning("Config version: " + configVersion);
+            getLogger().warning("Plugin version: " + version);
+            setEnabled(false);
+            return;
+        }
+        
         plugin = this;
+        
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerListener(), this);
 
-        saveDefaultConfig();
+        
+        loadCommands();
+
+        
         
         getLogger().info("Loaded!");
         getLogger().info("By ArcasCZ | http://uranus-portal.com");
@@ -38,6 +57,10 @@ public final class RPGLeveling extends JavaPlugin{
     
     public static RPGLeveling getPlugin(){
         return plugin;
+    }
+    
+    private void loadCommands(){
+        getCommand("level").setExecutor(new Level());
     }
 
     

@@ -7,6 +7,7 @@
 package cz.arcas.rpgleveling.listeners;
 
 import cz.arcas.rpgleveling.RPGLeveling;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,7 +30,11 @@ public class PlayerListener implements Listener {
     
     
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerExpChange(PlayerExpChangeEvent event) {
+    public void onPlayerExpChange(PlayerExpChangeEvent event) {       
+        if(!plugin.getConfig().getBoolean("enableXpBoost")){
+            return;
+        }
+        
         int exp = event.getAmount();
         event.setAmount(0);
 
@@ -62,10 +67,28 @@ public class PlayerListener implements Listener {
     public void onPlayerLevelChange(PlayerLevelChangeEvent event) {
         Player player = event.getPlayer();
 
-        if (player.getLevel() == 0 || event.getOldLevel() > event.getNewLevel()) {
+        if (player.getLevel() == 0) {
             return;
         }
+        
+        if(plugin.getConfig().getBoolean("useRankupCommand")){
+            String command = plugin.getConfig().getString("rankupCommand");
+            command = command.replaceAll("\\{user\\}", player.getName());
+            command = command.replaceAll("\\{level\\}", Integer.toString(player.getLevel()));
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
+        }
+        if(event.getOldLevel() > event.getNewLevel() && plugin.getConfig().getBoolean("playSoundOnLevelUp")){
+            String soundString = plugin.getConfig().getString("levelUpSound");
+            Sound sound = Sound.valueOf(soundString);
 
-        player.playSound(player.getLocation(), Sound.LEVEL_UP, 1F, 1F);
+            player.playSound(player.getLocation(), sound, 1F, 1F);
+        }
+        
+        if(event.getOldLevel() < event.getNewLevel() && plugin.getConfig().getBoolean("playSoundOnLevelDowb")){
+            String soundString = plugin.getConfig().getString("levelDownSound");
+            Sound sound = Sound.valueOf(soundString);
+
+            player.playSound(player.getLocation(), sound, 1F, 1F);
+        }
     }
 }

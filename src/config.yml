@@ -1,4 +1,25 @@
+# enable xp boost
+enableXpBoost: true
 # level * xpBoost = xpForNextLevel (default = 1250)
 xpBoost: 1250
 # if true, skip lvl 0 (need 1 XP for lvl up to 1) - else add +1 to each level
 startAtLvlOne: true
+# use command after rankup
+useRankupCommand: true
+# if true, what command should i use?
+# example:
+    #pex user {user} promote
+    #pex user {user} group set rank{level}
+    #pex user {user} group set {level}
+rankupCommand: pex user {user} group set level{level}
+# play sound after level up
+playSoundOnLevelUp: true
+# what sound play when player level up
+levelUpSound: LEVEL_UP
+# play sound after level down
+playSoundOnLevelDown: false
+# what sound play when player level down
+levelDownSound: ANVIL_BREAK
+# Can't touch this!
+version: 1.2.0
+
