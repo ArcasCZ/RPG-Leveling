@@ -1,2 +1,2 @@
 # RPG-Leveling
-Spigot plugin for better (RPG Like) leveling
+Spigot (Bukkit) plugin for better (RPG Like) leveling
