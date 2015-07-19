@@ -71,7 +71,7 @@ public class PlayerListener implements Listener {
             return;
         }
         
-        if(plugin.getConfig().getBoolean("useRankupCommand")){
+        if(plugin.getConfig().getBoolean("useLevelChangeCommand")){
             String command = plugin.getConfig().getString("rankupCommand");
             command = command.replaceAll("\\{user\\}", player.getName());
             command = command.replaceAll("\\{level\\}", Integer.toString(player.getLevel()));
