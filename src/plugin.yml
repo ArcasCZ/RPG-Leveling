@@ -1,7 +1,7 @@
 name: RPGLeveling
 author: ArcasCZ
 main: cz.arcas.rpgleveling.RPGLeveling
-version: 1.2.0
+version: 1.2.1
 commands:
    level:
       description: Get player level info.

@@ -71,20 +71,28 @@ public class PlayerListener implements Listener {
             return;
         }
         
-        if(plugin.getConfig().getBoolean("useLevelChangeCommand")){
-            String command = plugin.getConfig().getString("rankupCommand");
+        if(event.getOldLevel() < event.getNewLevel() || plugin.getConfig().getBoolean("useLevelUpCommand")){
+            String command = plugin.getConfig().getString("levelUpCommand");
             command = command.replaceAll("\\{user\\}", player.getName());
             command = command.replaceAll("\\{level\\}", Integer.toString(player.getLevel()));
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
         }
-        if(event.getOldLevel() > event.getNewLevel() && plugin.getConfig().getBoolean("playSoundOnLevelUp")){
+        
+        if(event.getOldLevel() > event.getNewLevel() || plugin.getConfig().getBoolean("useLevelDownCommand")){
+            String command = plugin.getConfig().getString("levelDownCommand");
+            command = command.replaceAll("\\{user\\}", player.getName());
+            command = command.replaceAll("\\{level\\}", Integer.toString(player.getLevel()));
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
+        }
+        
+        if(event.getOldLevel() < event.getNewLevel() && plugin.getConfig().getBoolean("playSoundOnLevelUp")){
             String soundString = plugin.getConfig().getString("levelUpSound");
             Sound sound = Sound.valueOf(soundString);
 
             player.playSound(player.getLocation(), sound, 1F, 1F);
         }
         
-        if(event.getOldLevel() < event.getNewLevel() && plugin.getConfig().getBoolean("playSoundOnLevelDowb")){
+        if(event.getOldLevel() > event.getNewLevel() && plugin.getConfig().getBoolean("playSoundOnLevelDown")){
             String soundString = plugin.getConfig().getString("levelDownSound");
             Sound sound = Sound.valueOf(soundString);
 
